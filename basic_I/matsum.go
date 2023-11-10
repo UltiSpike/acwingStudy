@@ -2,12 +2,10 @@ package main
 
 import "fmt"
 
-const N = 5
-
-var nums [N][N]int
-var matrixSum [N][N]int
-
 func main() {
+	var nums [N][N]int
+	var matrixSum [N][N]int
+
 	var n, m, q int
 	_, _ = fmt.Scanf("%d %d %d", &n, &m, &q)
 

@@ -1,37 +1,54 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+const N = 1e6 + 10
 
 func main() {
 	var n, m int
 	_, _ = fmt.Scanln(&n, &m)
 	var diff [N]int
 	var nums [N]int
-	var num int
 
+	reader := bufio.NewReader(os.Stdin)
+	line, _ := reader.ReadString('\n')
+	line = strings.TrimSpace(line)
+	words := strings.Split(line, " ")
 	for i := 1; i <= n; i++ {
-		_, _ = fmt.Scanf("%d", &num)
-		nums[i] = num
+
+		nums[i], _ = strconv.Atoi(words[i-1])
 		diff[i] = nums[i] - nums[i-1]
 	}
 
 	var l, r, c int
 
 	for i := 0; i < m; i++ {
+		inline, _ := reader.ReadString('\n')
+		inline = strings.TrimSpace(inline)
+		inWords := strings.Split(inline, " ")
+		l, _ = strconv.Atoi(inWords[0])
+		r, _ = strconv.Atoi(inWords[1])
+		c, _ = strconv.Atoi(inWords[2])
 
-		_, _ = fmt.Scanln(&l, &r, &c)
 		diff[l] += c
 		diff[r+1] -= c
 	}
 
+	writer := bufio.NewWriter(os.Stdout)
 	var ans [N]int
 	for i := 1; i <= n; i++ {
 
 		ans[i] = ans[i-1] + diff[i]
-
-		fmt.Printf("%d ", ans[i])
+		b := strconv.Itoa(ans[i]) + " "
+		_, _ = writer.WriteString(b)
 	}
-
+	_ = writer.Flush()
 }
 
 //
