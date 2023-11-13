@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const N = 1e6 + 10
-
 func main() {
 	var n, m int
 	_, _ = fmt.Scanln(&n, &m)
