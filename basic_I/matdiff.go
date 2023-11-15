@@ -65,3 +65,6 @@ func insert(x1, y1, x2, y2, c int, matdiff *[Nn][Nn]int) {
 	matdiff[x2+1][y2+1] += c
 
 }
+
+// preSum[i][j] = preSum[i-1][j] + preSum[i][j-1] - preSum[i-1][j-1] + nums[i][j]
+// nums[i][j] = preSum[i][j] - (preSum[i-1][j] + preSum[i][j-1] - preSum[i-1][j-1] )
