@@ -48,6 +48,7 @@ func main() {
 		a = append(a, r)
 	}
 	sort.Ints(a)
+
 	a = removeDuplicates(a)
 	for i := 0; i < n; i++ {
 		x, c = ad[i][0], ad[i][1]

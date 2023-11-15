@@ -1,67 +1,51 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
 
-const N = 1e6
+const N = 100010
 
-// 解法1 暴力解法:过不了
-//func main() {
-//	var n int
-//	var preSum [N]int
-//	var num int
-//	_, _ = fmt.Scanln(&n)
-//	for i := 0; i < n; i++ {
-//		_, _ = fmt.Scanf("%d", &num)
-//		preSum[i+1] = num + preSum[i]
-//	}
-//	var sum1, sum2, sum3 int
-//	var ans int
-//	for i := 0; i < n; i++ {
-//		for j := n - 1; j > i+1; j-- {
-//			sum1 = preSum[i+1]
-//			sum2 = preSum[j] - preSum[i+1]
-//			sum3 = preSum[n] - preSum[j]
-//			if sum1 == sum2 && sum1 == sum3 && j > i {
-//				ans += 1
-//			}
-//		}
-//	}
-//
-//	fmt.Println(ans)
-//
-//}
-
-// 解法2
 func main() {
 	var n int
-	var preSum [N]int
-	var num int
 	_, _ = fmt.Scanln(&n)
+	reader := bufio.NewReader(os.Stdin)
+	line, _ := reader.ReadString('\n')
+	line = strings.TrimSpace(line)
+	words := strings.Split(line, " ")
+	var num int
+	var a [N]int
 	for i := 0; i < n; i++ {
-		_, _ = fmt.Scanf("%d", &num)
-		preSum[i+1] = num + preSum[i]
+		num, _ = strconv.Atoi(words[i])
+		a[i+1] = a[i] + num
 	}
-	if preSum[n]%3 != 0 {
+	// 小心数组求和/3 不整除的情况
+	if a[n]%3 != 0 {
 		fmt.Println("0")
 		return
 	}
 
-	var avg int
-	avg = preSum[n] / 3
-
-	var sum1, sum2 int
-	var ans, cnt int
+	avg := a[n] / 3
+	var preSum, suffixSum int
+	var cnt int
+	var ans int
+	// 左边界取值[0, n-2] 右边界取值[1,n-1]
 	for i := 0; i < n-1; i++ {
-		sum1 = preSum[i+1]
-		sum2 = preSum[n] - preSum[i+1] // 控制中间区间长度>1
-		if sum2 == avg {
+		preSum = a[i+1]           // a[i] 前i项的前缀和和  a[i+1] 代表[0, i]的和
+		suffixSum = a[n] - a[i+1] // a[r]- a[l-1],区间(l, r)的和 a[n]- a[i+1] 代表 (i, n-1] 的前缀和
+		// 对于当前的r 合法的 L 处在 [0, i)区间里
+		// 所以不计当前i位置的cnt
+		if suffixSum == avg {
 			ans += cnt
 		}
-		if sum1 == avg {
+		if preSum == avg {
 			cnt++
 		}
 	}
 
 	fmt.Println(ans)
-
 }
