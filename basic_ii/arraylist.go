@@ -63,6 +63,7 @@ func main() {
 
 	writer := bufio.NewWriter(os.Stdout)
 	// 末尾是空节点 别写错了
+
 	for t := head; t != -1; t = ne[t] {
 		v := e[t]
 		_, _ = writer.WriteString(strconv.Itoa(v) + " ")
