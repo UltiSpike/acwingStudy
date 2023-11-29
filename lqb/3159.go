@@ -18,7 +18,6 @@ func main() {
 		if string(v) == "?" {
 			if b != "x" {
 				ans += 1
-				b = "x"
 			} else {
 				b = "?"
 			}

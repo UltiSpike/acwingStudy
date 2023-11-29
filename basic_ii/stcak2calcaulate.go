@@ -50,13 +50,13 @@ func main() {
 			} else {
 				if line[i] == ')' {
 					for operate[oo] != '(' {
-						cal()
+						cal2()
 					}
 					// 左括号也要出栈
 					oo--
 				} else {
 					for oo > -1 && table[line[i]] <= table[operate[oo]] {
-						cal()
+						cal2()
 					}
 					oo++
 					operate[oo] = line[i]
@@ -66,13 +66,13 @@ func main() {
 		// fmt.Println(byte(line[i]), nums[:pp+1])
 	}
 	for oo > -1 {
-		cal()
+		cal2()
 	}
 	fmt.Println(nums[0])
 }
 
 // 计算结果并压栈
-func cal() {
+func cal2() {
 	a := nums[pp]
 	pp--
 	b := nums[pp]
