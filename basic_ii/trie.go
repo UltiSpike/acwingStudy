@@ -20,6 +20,7 @@ func insertT(str string) {
 	for i := 0; i < len(str); i++ {
 		u = int(str[i] - 'a')
 		if son[p][u] == 0 {
+			// new 节点
 			id++
 			son[p][u] = id
 		}
